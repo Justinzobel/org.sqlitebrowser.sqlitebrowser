@@ -1,6 +1,6 @@
 app-id: org.sqlitebrowser.sqlitebrowser
 runtime: org.kde.Platform
-runtime-version: 5.15-25.08
+runtime-version: '6.11'
 sdk: org.kde.Sdk
 command: sqlitebrowser
 rename-icon: sqlitebrowser
@@ -52,17 +52,19 @@ modules:
   - name: sqlitebrowser
     buildsystem: cmake-ninja
     config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DFORCE_INTERNAL_QSCINTILLA=TRUE
+      - -DQT_MAJOR=Qt6
       - -Dsqlcipher=1
       - -Wno-dev
-      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     sources:
       - type: git
         url: https://github.com/sqlitebrowser/sqlitebrowser.git
-        tag: v3.13.1
-        commit: 5d84f53f85570a31767548cded89c96de6ff70ae
+        commit: 21dd3b897e65075c445c6d349db87eb908d7a9be
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
       - type: patch
         path: appdata.patch
+      - type: patch
+        path: 94b2f23517e59fdd8dd222989f704bef2c9460a2.patch
